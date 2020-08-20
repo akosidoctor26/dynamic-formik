@@ -1,0 +1,62 @@
+@import '../../../../styles/component/form.element';
+
+.component__formik--media-cloud-select.multiple {
+  padding: 2px 2px 4px 4px !important;
+
+  input {
+    min-height: 32px;
+  }
+
+  a.label {
+    margin: 2px 2px 0px 1px !important;
+    border-radius: 3px;
+    line-height: 21px;
+    font-size: 14px !important;
+    height: auto;
+    font-weight: 500;
+    opacity: 1;
+    border: none !important;
+    box-shadow: none !important;
+    background-color: rgba(184, 192, 203, 0.23);
+    color: var(--color-black-pearl-2);
+
+    &:hover,
+    &.active {
+      background-color: none !important;
+      color: var(--color-black-pearl-2);
+    }
+
+    i.delete.icon {
+      position: relative;
+      padding-right: 16px;
+
+      &:before {
+        content: url(../../../../images/icon_close_small_black.svg);
+        margin-left: 8px;
+        position: absolute;
+        top: -3px;
+      }
+    }
+  }
+
+  .dropdown.icon {
+    display: none;
+  }
+
+  .component__formik--media-cloud-select--menu-wrapper {
+    margin-top: 9px !important;
+  }
+
+  @include dark-mode {
+    a.label {
+      background-color: rgba(184, 192, 203, 0.23);
+      color: white;
+
+      i.delete.icon {
+        &:before {
+          content: url(../../../../images/icon_close_small.svg);
+        }
+      }
+    }
+  }
+}

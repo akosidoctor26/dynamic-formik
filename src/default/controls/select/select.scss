@@ -1,0 +1,174 @@
+@import '../../../../styles/component/formik.controls';
+@import '../../../../styles/component/form.element';
+
+.component__formik--media-cloud-select.ui.dropdown.selection {
+  padding-right: 14px;
+  width: 100%;
+  height: 100% !important;
+  border-radius: 4px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+
+  cursor: unset;
+  @extend %common;
+
+  &.disabled {
+    @extend %common-disabled;
+
+    & > .dropdown.icon {
+      display: none;
+    }
+  }
+
+  & > .text {
+    line-height: 18px;
+  }
+
+  & > input.search {
+    padding: inherit;
+    margin: inherit;
+  }
+
+  & > .dropdown.icon {
+    margin-right: -12px;
+    line-height: 18px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: var(--color-black-pearl-2);
+  }
+
+  &.active {
+    border-bottom-left-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
+    background-color: white;
+    & > .dropdown.icon {
+      border-bottom-right-radius: 0;
+    }
+
+    &.upward > .dropdown.icon {
+      border-bottom-right-radius: 3px;
+      border-top-right-radius: 0;
+    }
+  }
+
+  .component__formik--media-cloud-select--menu-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: calc(100% + 2px);
+    position: fixed;
+    left: -1px;
+    background-color: white;
+    border-radius: 4px;
+    margin-top: 12px;
+
+    .menu {
+      position: relative;
+      cursor: pointer;
+      width: calc(100%);
+      min-width: calc(100%);
+      box-sizing: border-box;
+      border-bottom-left-radius: 0px;
+      border-bottom-right-radius: 0px;
+      left: 1px;
+      border-radius: 4px 4px 0 0;
+      border-top: 1px solid rgba(184, 192, 203, 0.9) !important;
+      border-left: 1px solid rgba(184, 192, 203, 0.9) !important;
+      border-right: 1px solid rgba(184, 192, 203, 0.9) !important;
+      border-bottom: none;
+      box-shadow: none !important;
+
+      .item {
+        border-color: none;
+        padding-left: 16px !important;
+        border-top: none;
+
+        &:hover {
+          background-color: #e6ebf3;
+        }
+
+        &.selected {
+          background-color: white;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .component__formik--media-cloud-select--menu-clear {
+      cursor: pointer;
+      position: relative;
+      font-weight: bold;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 16px;
+      display: none;
+      width: calc(100%);
+      background-color: white;
+      z-index: 12;
+      border-radius: 0 0 4px 4px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      border: 1px solid rgba(184, 192, 203, 0.9) !important;
+
+      div {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        padding-left: 16px;
+
+        &:hover {
+          background-color: rgba(230, 235, 243, 0.9);
+        }
+      }
+
+      &.visible {
+        display: block;
+      }
+
+      &.blank,
+      &.disabled {
+        div {
+          color: var(--color-actions-default);
+          opacity: 0.5;
+        }
+
+        pointer-events: none;
+        cursor: default;
+      }
+    }
+  }
+
+  @include dark-mode {
+    background-color: transparent;
+    border: 0.5px solid var(--color-text-grey);
+
+    &.active {
+      background-color: var(--color-black-pearl-2) !important;
+    }
+
+    .component__formik--media-cloud-select--menu-wrapper {
+      .message,
+      .menu,
+      .item,
+      .component__formik--media-cloud-select--menu-clear {
+        background-color: var(--color-dark-theme-background-off) !important;
+        color: white !important;
+      }
+
+      .component__formik--media-cloud-select--menu-clear div,
+      .item {
+        &:hover {
+          background-color: rgba(244, 247, 251, 0.07) !important;
+        }
+      }
+    }
+
+    i.dropdown.icon:before,
+    & > .text,
+    & > .search {
+      color: white;
+    }
+
+    .component__formik--media-cloud-select--menu-clear:not(.disabled) {
+      color: var(--color-login-button-blue) !important;
+    }
+  }
+}
