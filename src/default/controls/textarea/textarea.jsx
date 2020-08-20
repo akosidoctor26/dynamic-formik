@@ -18,7 +18,7 @@ const Textarea = React.memo(
 
     return (
       <SemTextArea
-        className={classNames('component__formik--media-cloud-textarea', { disabled })}
+        className={classNames('dynamic-formik--media-cloud-textarea', { disabled })}
         disabled={disabled}
         name={name}
         onBlur={onBlur}

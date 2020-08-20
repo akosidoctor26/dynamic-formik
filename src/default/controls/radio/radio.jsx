@@ -9,10 +9,10 @@ import './media-cloud-radio.scss';
 const Radio = React.memo(({ disabled, name, onBlur, onChange, options, value }) => {
   const onLocalChange = (e, data) => onChange(data.value);
   return (
-    <div className={classNames('component__formik--media-cloud-radio', { disabled })}>
+    <div className={classNames('dynamic-formik--media-cloud-radio', { disabled })}>
       {options.map((option) => (
         <SemRadio
-          className="component__formik--media-cloud-radio--input"
+          className="dynamic-formik--media-cloud-radio--input"
           key={`${name}-${option.value}`}
           disabled={disabled}
           name={name}

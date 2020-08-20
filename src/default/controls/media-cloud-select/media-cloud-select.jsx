@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Dropdown } from '../radio/node_modules/semantic-ui-react';
 
-import { isEmpty } from './node_modules/utils';
+import { isEmpty } from 'utils';
 import debounce from 'lodash/debounce';
 import './media-cloud-select.scss';
 import './media-cloud-select.multiple.scss';
@@ -64,7 +64,7 @@ class Select extends Component {
    */
   displayCustom = () => {
     const clearBtn = this.selectDropdown.ref.querySelector(
-      '.component__formik--media-cloud-select--menu-clear'
+      '.dynamic-formik--media-cloud-select--menu-clear'
     );
 
     if (clearBtn) clearBtn.classList.add('visible');
@@ -84,8 +84,8 @@ class Select extends Component {
       const clearBtn = document.createElement('div');
       const clearTxt = document.createElement('div');
 
-      wrapper.className = 'component__formik--media-cloud-select--menu-wrapper';
-      clearBtn.className = classNames('component__formik--media-cloud-select--menu-clear', {
+      wrapper.className = 'dynamic-formik--media-cloud-select--menu-wrapper';
+      clearBtn.className = classNames('dynamic-formik--media-cloud-select--menu-clear', {
         disabled: this.props.required
       });
       clearTxt.innerHTML = 'Clear';
@@ -122,7 +122,7 @@ class Select extends Component {
   onClick = () => {
     const { value } = this.props;
     const clearBtn = this.selectDropdown.ref.querySelector(
-      '.component__formik--media-cloud-select--menu-clear'
+      '.dynamic-formik--media-cloud-select--menu-clear'
     );
 
     if (clearBtn) {
@@ -143,7 +143,7 @@ class Select extends Component {
    */
   onClose = () => {
     const clearBtn = this.selectDropdown.ref.querySelector(
-      '.component__formik--media-cloud-select--menu-clear'
+      '.dynamic-formik--media-cloud-select--menu-clear'
     );
 
     if (clearBtn) clearBtn.classList.remove('visible');
@@ -245,7 +245,7 @@ class Select extends Component {
 
     return (
       <Dropdown
-        className={classNames('component__formik--media-cloud-select', {
+        className={classNames('dynamic-formik--media-cloud-select', {
           disabled
         })}
         disabled={disabled}

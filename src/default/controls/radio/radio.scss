@@ -1,11 +1,11 @@
 @import '../../../../styles/component/form.element';
 
-.component__formik--media-cloud-radio {
+.dynamic-formik--media-cloud-radio {
   display: flex;
   height: 40px;
   align-items: center;
 
-  .component__formik--media-cloud-radio--input {
+  .dynamic-formik--media-cloud-radio--input {
     display: flex;
     flex-direction: row;
     margin-right: 30px;
@@ -33,7 +33,7 @@
   }
 
   &.disabled {
-    .component__formik--media-cloud-radio--input {
+    .dynamic-formik--media-cloud-radio--input {
       &.ui.checkbox label,
       &.ui.checkbox.checked label {
         opacity: 0.7;
@@ -43,7 +43,7 @@
   }
 
   @include dark-mode {
-    .component__formik--media-cloud-radio--input {
+    .dynamic-formik--media-cloud-radio--input {
       &.ui.checkbox label,
       &.ui.checkbox.checked label {
         color: white;

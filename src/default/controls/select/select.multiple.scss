@@ -1,6 +1,6 @@
 @import '../../../../styles/component/form.element';
 
-.component__formik--media-cloud-select.multiple {
+.dynamic-formik--media-cloud-select.multiple {
   padding: 2px 2px 4px 4px !important;
 
   input {
@@ -43,7 +43,7 @@
     display: none;
   }
 
-  .component__formik--media-cloud-select--menu-wrapper {
+  .dynamic-formik--media-cloud-select--menu-wrapper {
     margin-top: 9px !important;
   }
 

@@ -1,11 +1,24 @@
 import React from 'react';
 
+import schema from './schema';
 import './App.css';
 
-import DynamicFormik from 'dynamic-formik';
+import DynamicFormik, { ObjectGroup } from 'dynamic-formik';
 
 function App() {
-  return <DynamicFormik>{(formi) => <h1>Finally!</h1>}</DynamicFormik>;
+  return (
+    <DynamicFormik initialValues={{}}>
+      {(formik) => {
+        console.log(formik.values);
+        return (
+          <>
+            <h1>Finally!</h1>
+            <ObjectGroup schema={schema} />
+          </>
+        );
+      }}
+    </DynamicFormik>
+  );
 }
 
 export default App;

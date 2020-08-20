@@ -1,10 +1,10 @@
-const DEFAULT_FIELD_TYPES = Object.freeze({
+const DEFAULT_FIELD_TYPES = {
   CHECKBOX: 'checkbox',
   RADIO: 'radio',
   SELECT: 'select',
   TEXT: 'text',
   TEXTAREA: 'textarea'
-});
+};
 
 const DEFAULT_YUP_MAPPING = {
   [DEFAULT_FIELD_TYPES.TEXT]: 'string',

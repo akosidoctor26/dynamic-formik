@@ -11,7 +11,7 @@ const Checkbox = React.memo(({ disabled, name, onChange, placeholder, value }) =
 
   return (
     <SemCheckbox
-      className="component__formik--media-cloud-checkbox"
+      className="dynamic-formik--media-cloud-checkbox"
       key={name}
       disabled={disabled}
       name={name}

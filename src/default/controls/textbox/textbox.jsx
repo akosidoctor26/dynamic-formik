@@ -2,10 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import { formikHelpers } from '../radio/node_modules/utils/formik';
-import ClearSVG from 'images/mobile_card_close.svg';
-import SVG from 'hoc/cached-svg';
-import './media-cloud-textbox.scss';
+import formikHelpers from '../../../utils/helpers';
 
 /**
  * Controlled Input
@@ -32,38 +29,27 @@ const Textbox = React.memo(
       }
     };
 
-    const onClear = () => {
-      onBlur();
-      onChange('');
-    };
-
     return (
-      <div className={classNames('component__formik--media-cloud-textbox', { disabled })}>
-        <div className="ui input">
-          <input
-            disabled={disabled}
-            name={name}
-            onBlur={onBlur}
-            onChange={onLocalChange}
-            onFocus={onFocus}
-            placeholder={placeholder}
-            required={required}
-            value={value}
-            data-lpignore={true}
-            {...props}
-          />
-        </div>
-        {value && (
-          <div className="component__formik--media-cloud-textbox--clear" onClick={onClear}>
-            <SVG src={ClearSVG} />
-          </div>
-        )}
+      <div className={classNames('dynamic-formik--media-cloud-textbox', { disabled })}>
+        <input
+          disabled={disabled}
+          name={name}
+          onBlur={onBlur}
+          onChange={onLocalChange}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          required={required}
+          value={value}
+          data-lpignore={true}
+          {...props}
+        />
       </div>
     );
   },
-  formikHelpers.areEqual
+  formikHelpers.schema.areEqual
 );
 
+Textbox.displayName = 'Textbox';
 Textbox.defaultProps = {
   maxLength: -1,
   onBlur: () => {},

@@ -6,12 +6,13 @@ import { DynamicFormikContext } from './dynamic-formik';
 
 const ObjectGroup = React.memo(({ mode, parent, schema }) => {
   const formContext = useContext(DynamicFormikContext);
-  const FieldComponent = formContext.FieldComponent;
+  const FieldWrapper = formContext.FieldWrapper;
+  const fieldTypes = Object.values(formContext.fieldTypes);
 
   const renderBasedOnType = (field) => {
-    if (formContext.fieldTypes.includes(field.type)) {
+    if (fieldTypes.includes(field.type)) {
       return (
-        <FieldComponent
+        <FieldWrapper
           {...field}
           key={field.name}
           name={`${parent ? `${parent}.${field.name}` : `${schema.name}.${field.name}`}`} // Finally, render the control with the name constructed from parent
@@ -42,6 +43,8 @@ const ObjectGroup = React.memo(({ mode, parent, schema }) => {
         />
       );
     }
+
+    return null;
   };
 
   return (
@@ -54,6 +57,7 @@ const ObjectGroup = React.memo(({ mode, parent, schema }) => {
   );
 });
 
+ObjectGroup.displayName = 'ObjectGroup';
 ObjectGroup.propTypes = {
   mode: PropTypes.string,
   parent: PropTypes.string,
