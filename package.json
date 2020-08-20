@@ -7,17 +7,6 @@
   ],
   "module": "build/index.es.js",
   "main": "build/index.js",
-  "dependencies": {
-    "@testing-library/jest-dom": "4.2.4",
-    "@testing-library/react": "9.5.0",
-    "@testing-library/user-event": "7.2.1",
-    "formik": "2.1.5",
-    "prop-types": "15.7.2",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-scripts": "3.4.3",
-    "yup": "0.29.3"
-  },
   "scripts": {
     "build": "rollup -c",
     "start": "rollup -c -w",
@@ -43,8 +32,18 @@
     "@rollup/plugin-babel": "5.2.0",
     "@rollup/plugin-commonjs": "15.0.0",
     "@rollup/plugin-node-resolve": "9.0.0",
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "9.5.0",
+    "@testing-library/user-event": "7.2.1",
     "node-sass": "4.14.1",
-    "rollup": "2.26.4",
-    "rollup-plugin-peer-deps-external": "2.2.3"
+    "react-scripts": "3.4.3",
+    "rollup": "2.26.4"
+  },
+  "peerDependencies": {
+    "formik": "2.1.5",
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "yup": "0.29.3"
   }
 }
