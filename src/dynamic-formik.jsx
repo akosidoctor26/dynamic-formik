@@ -28,11 +28,12 @@ DynamicFormik.displayName = 'DynamicFormik';
 DynamicFormik.defaultProps = {
   FieldWrapper: DefaultFieldWrapper,
   fieldTypes: DEFAULT_FIELD_TYPES,
+  initialValues: {},
   lookupSource: () => {}
 };
 DynamicFormik.propTypes = {
-  children: PropTypes.isRequired,
-  name: PropTypes.string.isRequired,
+  children: PropTypes.func.isRequired,
+  name: PropTypes.string,
   lookupSource: PropTypes.func
 };
 

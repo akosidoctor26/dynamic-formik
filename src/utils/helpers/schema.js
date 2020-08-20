@@ -1,28 +1,12 @@
 import * as Yup from 'yup';
 
 import * as formikConstants from '../constants';
-import { getObjectValueFromString, setObjectValueFromString } from './common';
-
-/**
- * Used by React.memo to allow rerender of fields only when `value` and `disabled` change
- * @param {Object} prevProps
- * @param {Object} nextProps
- */
-const areEqual = (prevProps, nextProps) => {
-  return (
-    prevProps.value === nextProps.value &&
-    prevProps.disabled === nextProps.disabled &&
-    (prevProps.options && nextProps.options
-      ? prevProps.options.length === nextProps.options.length
-      : true)
-  );
-};
 
 /**
  * Generates fields values from `fields` from schema
  * @param {Object[]} fields
  */
-const getFieldsValuesFromSchema = (fields, modelName) => {
+const getFieldsValuesFromSchema = (fields) => {
   return fields?.reduce((acc, field) => {
     if (field.type === 'array') {
       //type of tabular will generate array of fields
@@ -32,7 +16,7 @@ const getFieldsValuesFromSchema = (fields, modelName) => {
       acc[field.name] = { ...getFieldsValuesFromSchema(field.fields) };
     } else {
       //Warning: changing this from undefined to an empty string can break the VOD add title flow.
-      acc[field.name] = undefined;
+      acc[field.name] = '';
     }
     return acc;
   }, {});
@@ -44,15 +28,14 @@ const getFieldsValuesFromSchema = (fields, modelName) => {
  * @param {Object} schema
  * @param {string} schema.name
  * @param {Object[]} schema.fields
- * @param {string} modelName
  */
-const getInitialValuesFromSchema = (schema, modelName) => {
+const getInitialValuesFromSchema = (schema) => {
   // Root object must have name and fields
   if (!schema) return {};
   if (!(schema?.name && schema?.fields)) return;
   // one parent
 
-  return { [schema.name]: getFieldsValuesFromSchema(schema.fields, modelName, schema.name) };
+  return { [schema.name]: getFieldsValuesFromSchema(schema.fields, schema.name) };
 };
 
 /**
@@ -109,10 +92,4 @@ const getValidationSchema = (schema, yupMapping = formikConstants.DEFAULT_YUP_MA
   };
 };
 
-export {
-  areEqual,
-  getInitialValuesFromSchema,
-  getObjectValueFromString,
-  getValidationSchema,
-  setObjectValueFromString
-};
+export { getInitialValuesFromSchema, getValidationSchema };

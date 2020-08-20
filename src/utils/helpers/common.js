@@ -1,4 +1,19 @@
 /**
+ * Used by React.memo to allow rerender of fields only when `value` and `disabled` change
+ * @param {Object} prevProps
+ * @param {Object} nextProps
+ */
+const areEqual = (prevProps, nextProps) => {
+  return (
+    prevProps.value === nextProps.value &&
+    prevProps.disabled === nextProps.disabled &&
+    (prevProps.options && nextProps.options
+      ? prevProps.options.length === nextProps.options.length
+      : true)
+  );
+};
+
+/**
  * Gets an object value using a string path
  * @param {Object} obj The object we are going to get value from
  * @param {string} strPath The string path (Ex. obj1.obj2.obj3, obj1.arr1[0].arr2[0].obj2)
@@ -64,4 +79,4 @@ const setObjectValueFromString = (origObj, strPath, value) => {
   return objCopy;
 };
 
-export { getObjectValueFromString, setObjectValueFromString };
+export { areEqual, getObjectValueFromString, setObjectValueFromString };
