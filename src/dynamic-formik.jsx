@@ -15,7 +15,7 @@ const DynamicFormik = ({ children, fieldTypes, FieldWrapper, name, lookupSource,
     <Formik {...props}>
       {(formik) => (
         <DynamicFormikContext.Provider
-          value={{ fieldTypes, FieldWrapper, formName: name, lookupSource: lookupSource }}
+          value={{ fieldTypes, FieldWrapper, lookupSource: lookupSource }}
         >
           <Form>{children(formik)}</Form>
         </DynamicFormikContext.Provider>

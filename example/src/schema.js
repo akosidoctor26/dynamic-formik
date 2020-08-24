@@ -10,16 +10,30 @@ const schema = {
     {
       name: 'lname',
       label: 'Last Name',
-      type: 'text'
+      type: 'textarea'
+    },
+    {
+      name: 'isRemote',
+      label: 'Is Remote?',
+      type: 'checkbox'
+    },
+    {
+      name: 'experience',
+      label: 'Experience',
+      type: 'radio',
+      options: [
+        { key: 'junior', value: 'junior', label: 'Junior' },
+        { key: 'senior', value: 'senior', label: 'Senior' }
+      ]
     },
     {
       name: 'role',
       label: 'Role',
       type: 'select',
       options: [
-        { key: 'qa', value: 'qa', text: 'QA' },
-        { key: 'dev', value: 'dev', text: 'DEV' },
-        { key: 'ba', value: 'ba', text: 'BA' }
+        { key: 'qa', value: 'qa', label: 'QA' },
+        { key: 'dev', value: 'dev', label: 'DEV' },
+        { key: 'ba', value: 'ba', label: 'BA' }
       ]
     },
     {

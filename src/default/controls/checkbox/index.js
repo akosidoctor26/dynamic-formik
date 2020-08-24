@@ -1,1 +1,1 @@
-export { default } from './media-cloud-checkbox';
+export { default } from './checkbox';

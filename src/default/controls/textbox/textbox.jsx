@@ -30,7 +30,7 @@ const Textbox = React.memo(
     };
 
     return (
-      <div className={classNames('dynamic-formik--media-cloud-textbox', { disabled })}>
+      <div className={classNames('dyamic-formik__textbox', { disabled })}>
         <input
           disabled={disabled}
           name={name}

@@ -11,6 +11,7 @@ function App() {
   return (
     <DynamicFormik initialValues={initialValues}>
       {(formik) => {
+        console.log(formik.values)
         return (
           <>
             <h1>Finally!</h1>

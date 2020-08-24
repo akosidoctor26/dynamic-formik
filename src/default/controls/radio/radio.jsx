@@ -1,27 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Radio as SemRadio } from 'semantic-ui-react';
 
-import { formikHelpers } from 'utils/formik';
-import './media-cloud-radio.scss';
+import formikHelpers from '../../../utils/helpers';
 
 const Radio = React.memo(({ disabled, name, onBlur, onChange, options, value }) => {
-  const onLocalChange = (e, data) => onChange(data.value);
+  const onLocalChange = (e) => onChange(e.target.value);
   return (
-    <div className={classNames('dynamic-formik--media-cloud-radio', { disabled })}>
+    <div className={classNames('dynamic-formik-radio', { disabled })}>
       {options.map((option) => (
-        <SemRadio
-          className="dynamic-formik--media-cloud-radio--input"
-          key={`${name}-${option.value}`}
-          disabled={disabled}
-          name={name}
-          value={option.value}
-          checked={option.value === value}
-          onBlur={onBlur}
-          onChange={onLocalChange}
-          label={option.text}
-        />
+        <div key={`${name}-${option.value}`}>
+          <input
+            type="radio"
+            className="dynamic-formik-radio--input"
+            disabled={disabled}
+            name={name}
+            value={option.value}
+            checked={option.value === value}
+            onBlur={onBlur}
+            onChange={onLocalChange}
+          />
+          <span>{option.label}</span>
+        </div>
       ))}
     </div>
   );

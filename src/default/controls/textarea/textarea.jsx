@@ -1,14 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { TextArea as SemTextArea } from '../radio/node_modules/semantic-ui-react';
 
-import { formikHelpers } from '../radio/node_modules/utils/formik'; //todo move to generic helper file
-import './media-cloud-textarea.scss';
+import formikHelpers from '../../../utils/helpers';
 
 const Textarea = React.memo(
   ({ disabled, maxLength, name, onBlur, onChange, placeholder, required, value, ...props }) => {
-    const onLocalChange = (e, data) => {
+    const onLocalChange = (e) => {
+      const data = e.target.value;
       if (maxLength === -1 || maxLength - data.value.length > 0) {
         onChange(data.value);
       } else {
@@ -17,8 +16,8 @@ const Textarea = React.memo(
     };
 
     return (
-      <SemTextArea
-        className={classNames('dynamic-formik--media-cloud-textarea', { disabled })}
+      <textarea
+        className={classNames('dyamic-formik__textarea', { disabled })}
         disabled={disabled}
         name={name}
         onBlur={onBlur}

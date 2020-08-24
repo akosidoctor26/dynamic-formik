@@ -48,7 +48,7 @@ const ObjectGroup = React.memo(({ mode, parent, schema }) => {
   };
 
   return (
-    <div className="dynamic-formik-object-group">
+    <div className="dyamic-formik__object-group">
       {schema.fields &&
         schema.fields.map((field) => {
           return renderBasedOnType(field);

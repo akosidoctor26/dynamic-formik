@@ -1,4 +1,3 @@
-/* eslint-disable react/display-name */
 import React from 'react';
 import { FieldArray } from 'formik';
 import PropTypes from 'prop-types';
@@ -62,14 +61,14 @@ const ArrayGroup = React.memo(({ schema, parent, directParentType }) => {
         };
 
         return (
-          <div className="dynamic-formik-array-group">
+          <div className="dyamic-formik__array-group">
             {arrayValues?.map?.((field, arrayIndex) => (
-              <div className="dynamic-formik-array-group--entry" key={schema.name + arrayIndex}>
-                <div className="dynamic-formik-array-group--header">
+              <div className="dyamic-formik__array-group--entry" key={schema.name + arrayIndex}>
+                <div className="dyamic-formik__array-group--header">
                   <div>{`${schema.label} ${arrayIndex + 1}`}</div>
                   {allowRemove && (
                     <div
-                      className="dynamic-formik-array-group--remove"
+                      className="dyamic-formik__array-group--remove"
                       onClick={() => onRemoveClick(arrayIndex)}
                     >
                       <span>X</span>
@@ -84,9 +83,9 @@ const ArrayGroup = React.memo(({ schema, parent, directParentType }) => {
               </div>
             ))}
             {allowAdd && (
-              <div className="dynamic-formik-array-group--add" onClick={onAddClick}>
+              <div className="dyamic-formik__array-group--add" onClick={onAddClick}>
                 <span>+</span>
-                <div className="dynamic-formik-array-group--add-text">
+                <div className="dyamic-formik__array-group--add-text">
                   <p>ADD NEW ENTRY</p>
                   <p>{schema.label}</p>
                 </div>
@@ -99,6 +98,7 @@ const ArrayGroup = React.memo(({ schema, parent, directParentType }) => {
   );
 });
 
+ArrayGroup.displayName = 'ArrayGroup';
 ArrayGroup.propTypes = {
   schema: PropTypes.object, //schema of this group
   parent: PropTypes.string, // The key of the parent for constructing the name of this group
