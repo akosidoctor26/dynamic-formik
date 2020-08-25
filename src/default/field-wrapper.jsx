@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import classNames from 'classnames';
-import { useField } from 'formik';
+import { useField, useFormikContext } from 'formik';
 
 import Checkbox from './controls/checkbox';
 import Radio from './controls/radio';
 import Select from './controls/select';
 import Textarea from './controls/textarea';
 import Textbox from './controls/textbox';
+import formikHelpers from '../utils/helpers';
 
 /*
 field: name, onBlur, onChange, value
@@ -15,9 +16,30 @@ helpers: setError, setTouched, setValue
 props: metadata schema field props (label, maxLength, options, readonly, required, config(for anything else specific to the control) )
 */
 const DefaultFieldWrapper = React.memo(
-  ({ name, type, validations: ignore, ...props }) => {
+  ({ conditions = {}, name, type, validations: ignore, ...props }) => {
     // data and helpers from formik
     const [field, meta, helpers] = useField(name);
+    const formik = useFormikContext();
+    const conditionProps = formikHelpers.schema.getConditions({ conditions, name }, formik);
+
+    useEffect(() => {
+      if (
+        conditionProps &&
+        conditionProps.value !== undefined &&
+        conditionProps.value !== field.value
+      ) {
+        console.log('value changed', conditionProps, field.value);
+        helpers.setValue(conditionProps.value);
+      }
+    }, [conditionProps, conditionProps.newValue, conditionProps.value, field.value, helpers]);
+
+    // field props
+    const onBlur = () => helpers.setTouched(true);
+    const onChange = (value) => helpers.setValue(value);
+    const disabled = conditionProps.disabled || props.disabled;
+    const hidden = conditionProps.hidden || props.hidden;
+
+    if (hidden) return null;
 
     const getField = () => {
       switch (type) {
@@ -34,20 +56,17 @@ const DefaultFieldWrapper = React.memo(
       }
     };
 
-    const onBlur = () => helpers.setTouched(true);
-    const onChange = (value) => helpers.setValue(value);
-
     const CustomField = getField();
     return (
       <div
         className={classNames('dyamic-formik__field-wrapper', type, name.replace('.', '-'), {
-          disabled: props.disabled,
+          disabled,
           error: meta.touched && meta.error
         })}
       >
         <CustomField
           {...field}
-          disabled={props.disabled}
+          disabled={disabled}
           required={props.required}
           label={props.label}
           maxLength={props.maxLength}

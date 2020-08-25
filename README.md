@@ -5,13 +5,16 @@
 ##TODO
 
 - Storybook for sample app
+- Dynamic Lookup Source (API)
 
 ## FEATURES
 
 - Generate a Form using a JSON schema.
 - Nested Objects or Arrays.
-- Conditional fields
-- Dynamic Lookup Source
+- Conditional fields - Sets field property based on other field's value/prop on the same level
+  - hidden
+  - disabled
+  - value
 - Generate Yup validation from the form's schema
 
 ```

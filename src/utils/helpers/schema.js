@@ -1,5 +1,6 @@
 import * as Yup from 'yup';
 
+import * as commonHelpers from './common';
 import * as formikConstants from '../constants';
 
 /**
@@ -15,8 +16,9 @@ const getFieldsValuesFromSchema = (fields) => {
       // type of object will generate object of fields
       acc[field.name] = { ...getFieldsValuesFromSchema(field.fields) };
     } else {
-      //Warning: changing this from undefined to an empty string can break the VOD add title flow.
-      acc[field.name] = '';
+      if (field.type === 'checkbox') {
+        acc[field.name] = false;
+      } else acc[field.name] = '';
     }
     return acc;
   }, {});
@@ -95,4 +97,44 @@ const getValidationSchema = (schema, yupMapping = formikConstants.DEFAULT_YUP_MA
   });
 };
 
-export { getInitialValuesFromSchema, getValidationSchema };
+const getComparisons = (currentValue, expectedValue, comparison) => {
+  switch (comparison) {
+    case 'equal to':
+      return currentValue === expectedValue;
+    case 'not equal to':
+      return currentValue !== expectedValue;
+    case 'not empty':
+      return !commonHelpers.isNullOrEmpty(currentValue);
+    case 'empty':
+      return commonHelpers.isNullOrEmpty(currentValue);
+    default:
+      return false;
+  }
+};
+
+const getConditions = (props, formik) => {
+  return Object.entries(props.conditions).reduce((acc, [schemaPropKey, condition]) => {
+    const currentConditionFieldValue = commonHelpers.getObjectValueFromString(
+      formik.values,
+      props.name.replace(/\..*$/, `.${condition.whenField}`)
+    );
+
+    const comparisonResult = getComparisons(
+      currentConditionFieldValue,
+      condition.value,
+      condition.is
+    );
+
+    if (schemaPropKey !== 'value') {
+      acc[schemaPropKey] = comparisonResult;
+    } else {
+      if (comparisonResult) {
+        acc[schemaPropKey] = condition.newValue;
+      }
+    }
+
+    return acc;
+  }, {});
+};
+
+export { getComparisons, getConditions, getInitialValuesFromSchema, getValidationSchema };

@@ -24,8 +24,29 @@ const schema = {
       type: 'checkbox'
     },
     {
-      name: 'experience',
-      label: 'Experience',
+      name: 'withinUs',
+      label: 'Living in US?',
+      type: 'checkbox',
+      // Conditional Fields
+      conditions: {
+        disabled: { whenField: 'isRemote', is: 'empty' },
+        value: { whenField: 'isRemote', is: 'empty', newValue: false }
+      }
+    },
+    {
+      name: 'location',
+      label: 'Location',
+      type: 'text',
+      // Conditional Fields
+      conditions: {
+        hidden: { whenField: 'isRemote', is: 'equal to', value: false },
+
+        value: { whenField: 'isRemote', is: 'equal to', value: false, newValue: '' }
+      }
+    },
+    {
+      name: 'positions',
+      label: 'Position',
       type: 'radio',
       options: [
         { key: 'junior', value: 'junior', label: 'Junior' },
@@ -45,7 +66,7 @@ const schema = {
     {
       name: 'projects',
       label: 'Projects',
-      type: 'array',
+      type: 'array', // Array of fields inside an object
       maxLength: 3,
       required: true,
       fields: [

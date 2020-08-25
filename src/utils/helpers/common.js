@@ -79,4 +79,26 @@ const setObjectValueFromString = (origObj, strPath, value) => {
   return objCopy;
 };
 
-export { areEqual, getObjectValueFromString, setObjectValueFromString };
+/**
+ * Checks if the value passed is an object
+ * @param {any} value
+ */
+const isObject = (value) => value && typeof value === 'object' && !Array.isArray(value);
+
+/**
+ * Checks if the values passed is array
+ * @param {any} value
+ */
+const isArray = (value) => value && typeof value === 'object' && Array.isArray(value);
+
+/**
+ * Checks if value is null or empty
+ * @param {array|object} value
+ * @returns {boolean}
+ */
+const isNullOrEmpty = (value) =>
+  !value ||
+  (isArray(value) && value.length === 0) ||
+  (isObject(value) && Object.entries(value).length === 0);
+
+export { areEqual, getObjectValueFromString, isNullOrEmpty, setObjectValueFromString };

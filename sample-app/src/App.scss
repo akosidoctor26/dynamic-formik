@@ -1,5 +1,11 @@
 form {
   padding: 50px;
+
+  .dyamic-formik__field-wrapper {
+    &.disabled {
+      opacity: 0.5;
+    }
+  }
   .dyamic-formik__array-group {
     .dyamic-formik__array-group--header {
       display: flex;
