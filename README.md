@@ -5,12 +5,21 @@
 ##TODO
 - Custom validations from Schema
 - Storybook for sample app
+  - Basic flat object form
+  - Nested object form
+  - Nested object and array form
+  - Multiple schemas inside a form
+  - Validations from schema
+  - Conditional fields
 - Dynamic Lookup Source (API)
 - Hierarchical fields - Filter lookups based on other field's value
+- Default error component
+- Other config for extensibility
+  - on<event> handlers
+  - other props
 
 ## FEATURES
-
-- Generate a Form using a JSON schema.
+- Generate a Form using a JSON schema - text, textarea, checkbox, select, and option. No styles.
 - Nested Objects or Arrays.
 - Conditional fields - Sets field property based on other field's value/prop on the same level
   - hidden
@@ -111,6 +120,7 @@ export default schema;
 ```
 
 ![Rendered Form from the schema above](/sample-app/images/sample-app.gif)
+
 
 ---
 
