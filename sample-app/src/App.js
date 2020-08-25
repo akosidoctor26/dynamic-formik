@@ -12,10 +12,10 @@ function App() {
   return (
     <DynamicFormik initialValues={initialValues} onSubmit={onSubmit} fullSchema={schema}>
       {(formik) => {
-        console.log(formik.errors)
+        console.log(formik.errors);
         return (
           <>
-            <h1>Basic Form rendered using JSON schema (using Formik)</h1>
+            <h1>Basic Form rendered from JSON schema (using Formik)</h1>
             <ObjectGroup schema={schema} />
             <input type="submit" value="Submit" />
           </>
