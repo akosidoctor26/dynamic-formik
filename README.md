@@ -84,7 +84,7 @@ const schema = {
 export default schema;
 ```
 
-[Rendered Form from the schema above](./sample-app/images/basic-form.png)
+![Rendered Form from the schema above](/sample-app/images/basic%20form.png)
 
 ---
 
