@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FieldArray } from 'formik';
 import PropTypes from 'prop-types';
 
 import ObjectGroup from './object-group';
 import helpers from './utils/helpers';
+import { DynamicFormikContext } from './dynamic-formik';
 
 /**
  * ArrayGroup contains array of FieldGroup
@@ -12,6 +13,8 @@ import helpers from './utils/helpers';
  * '{ Rights and Restrictions: { Station Embargo: [{custom_tab_station_embargo: '' }] } }' in the form values.
  */
 const ArrayGroup = React.memo(({ schema, parent, directParentType }) => {
+  const { arrayGroupRenderers } = useContext(DynamicFormikContext);
+
   // Get empty array row/entry using the schema.
   const valueFromSchema = helpers.schema.getInitialValuesFromSchema(schema);
 
@@ -71,7 +74,7 @@ const ArrayGroup = React.memo(({ schema, parent, directParentType }) => {
                       className="dyamic-formik__array-group--remove"
                       onClick={() => onRemoveClick(arrayIndex)}
                     >
-                      <span>X</span>
+                      {arrayGroupRenderers.removeButton}
                     </div>
                   )}
                 </div>
@@ -84,11 +87,7 @@ const ArrayGroup = React.memo(({ schema, parent, directParentType }) => {
             ))}
             {allowAdd && (
               <div className="dyamic-formik__array-group--add" onClick={onAddClick}>
-                <span>+</span>
-                <div className="dyamic-formik__array-group--add-text">
-                  <p>ADD NEW ENTRY</p>
-                  <p>{schema.label}</p>
-                </div>
+                {arrayGroupRenderers.addButton}
               </div>
             )}
           </div>

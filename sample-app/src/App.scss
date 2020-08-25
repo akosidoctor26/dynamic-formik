@@ -1,0 +1,27 @@
+form {
+  padding: 50px;
+  .dyamic-formik__array-group {
+    .dyamic-formik__array-group--header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .dyamic-formik__array-group--add {
+      display: flex;
+      flex-direction: row-reverse;
+      display: flex;
+    }
+
+    .dyamic-formik__object-group {
+      display: flex;
+
+      .dyamic-formik__field-wrapper {
+        flex-grow: 1;
+
+        &:not(:last-child) {
+          margin-right: 12px;
+        }
+      }
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import { useField } from 'formik';
 
@@ -7,7 +7,6 @@ import Radio from './controls/radio';
 import Select from './controls/select';
 import Textarea from './controls/textarea';
 import Textbox from './controls/textbox';
-import { DynamicFormikContext } from '../dynamic-formik';
 
 /*
 field: name, onBlur, onChange, value
@@ -15,7 +14,6 @@ meta: error, initialError, initialTouched, initialValue, touched, value
 helpers: setError, setTouched, setValue
 props: metadata schema field props (label, maxLength, options, readonly, required, config(for anything else specific to the control) )
 */
-
 const DefaultFieldWrapper = React.memo(
   ({ name, type, validations: ignore, ...props }) => {
     // data and helpers from formik
@@ -47,23 +45,18 @@ const DefaultFieldWrapper = React.memo(
           error: meta.touched && meta.error
         })}
       >
-        <label htmlFor={field.name}>
-          {props.label} {props.required && `*`}
-        </label>
-        <div className="dyamic-formik__field-wrapper--input">
-          {/** show error as text on top of the field instead of placeholder  */}
-          {!field.value && meta.touched && meta.error && <span>{meta.error}</span>}
-          <CustomField
-            {...field}
-            disabled={props.disabled}
-            required={props.required}
-            maxLength={props.maxLength}
-            onBlur={onBlur}
-            onChange={onChange}
-            options={props.options}
-            {...props.config}
-          />
-        </div>
+        <CustomField
+          {...field}
+          disabled={props.disabled}
+          required={props.required}
+          label={props.label}
+          maxLength={props.maxLength}
+          onBlur={onBlur}
+          onChange={onChange}
+          options={props.options}
+          placeholder={`${props.label}${props.required ? '*' : ''}`}
+          {...props.config}
+        />
       </div>
     );
   },

@@ -1,27 +1,24 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
-import formikHelpers from '../../../utils/helpers';
+import formikHelpers from '../../utils/helpers';
 
-/**
- * Controlled Input
- */
-const Textbox = React.memo(
+const Textarea = React.memo(
   ({
+    className,
     disabled,
     maxLength,
     name,
     onBlur,
     onChange,
-    onFocus,
     placeholder,
     required,
     value,
     ...props
   }) => {
     const onLocalChange = (e) => {
-      const data = e.target;
+      const data = e.target.value;
       if (maxLength === -1 || maxLength - data.value.length > 0) {
         onChange(data.value);
       } else {
@@ -30,43 +27,37 @@ const Textbox = React.memo(
     };
 
     return (
-      <div className={classNames('dyamic-formik__textbox', { disabled })}>
-        <input
+      <div className={classNames('dyamic-formik__field-textarea', { className, disabled })}>
+        <textarea
           disabled={disabled}
           name={name}
           onBlur={onBlur}
           onChange={onLocalChange}
-          onFocus={onFocus}
           placeholder={placeholder}
           required={required}
           value={value}
-          data-lpignore={true}
           {...props}
         />
       </div>
     );
   },
-  formikHelpers.schema.areEqual
+  formikHelpers.common.areEqual
 );
 
-Textbox.displayName = 'Textbox';
-Textbox.defaultProps = {
+Textarea.defaultProps = {
   maxLength: -1,
   onBlur: () => {},
-  onChange: () => {},
-  onFocus: () => {}
+  onChange: () => {}
 };
-
-Textbox.propTypes = {
+Textarea.propTypes = {
   disabled: PropTypes.bool,
   maxLength: PropTypes.number,
   name: PropTypes.string.isRequired,
   onBlur: PropTypes.func,
   onChange: PropTypes.func,
-  onFocus: PropTypes.func,
   placeholder: PropTypes.string,
   required: PropTypes.bool,
   value: PropTypes.string
 };
 
-export default Textbox;
+export default Textarea;

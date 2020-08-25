@@ -10,6 +10,12 @@ const schema = {
     {
       name: 'lname',
       label: 'Last Name',
+      type: 'text',
+      required: true
+    },
+    {
+      name: 'background',
+      label: 'Background',
       type: 'textarea'
     },
     {
@@ -46,6 +52,11 @@ const schema = {
         {
           name: 'projectName',
           label: 'Project Name',
+          type: 'text'
+        },
+        {
+          name: 'position',
+          label: 'Position',
           type: 'text'
         }
       ]

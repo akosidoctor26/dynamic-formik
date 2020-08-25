@@ -4,18 +4,30 @@ import { Formik, Form } from 'formik';
 
 import DefaultFieldWrapper from './default/field-wrapper';
 import { DEFAULT_FIELD_TYPES } from './utils/constants';
+import formikHelpers from './utils/helpers';
 
 const DynamicFormikContext = createContext({});
+
 /**
- *
+ * Wraps formik
  * @param {Object} props ...props is meant for Formik properties
  */
-const DynamicFormik = ({ children, fieldTypes, FieldWrapper, name, lookupSource, ...props }) => {
+const DynamicFormik = ({
+  arrayGroupRenderers,
+  children,
+  fieldTypes,
+  FieldWrapper,
+  fullSchema,
+  name,
+  lookupSource,
+  ...props
+}) => {
+  console.log(fullSchema, formikHelpers.schema.getValidationSchema(fullSchema));
   return (
-    <Formik {...props}>
+    <Formik validationSchema={formikHelpers.schema.getValidationSchema(fullSchema)} {...props}>
       {(formik) => (
         <DynamicFormikContext.Provider
-          value={{ fieldTypes, FieldWrapper, lookupSource: lookupSource }}
+          value={{ arrayGroupRenderers, fieldTypes, FieldWrapper, lookupSource: lookupSource }}
         >
           <Form>{children(formik)}</Form>
         </DynamicFormikContext.Provider>
@@ -26,6 +38,10 @@ const DynamicFormik = ({ children, fieldTypes, FieldWrapper, name, lookupSource,
 
 DynamicFormik.displayName = 'DynamicFormik';
 DynamicFormik.defaultProps = {
+  arrayGroupRenderers: {
+    addButton: <a href="#">Add New</a>,
+    removeButton: <a href="#">Remove</a>
+  },
   FieldWrapper: DefaultFieldWrapper,
   fieldTypes: DEFAULT_FIELD_TYPES,
   initialValues: {},

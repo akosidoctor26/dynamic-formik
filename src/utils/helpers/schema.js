@@ -46,7 +46,7 @@ const getInitialValuesFromSchema = (schema) => {
  */
 const getValidationSchemaForFields = (fields, yupMapping) => {
   return fields?.reduce((acc, field) => {
-    if (field.type === 'array' || field.type === 'table') {
+    if (field.type === 'array') {
       acc[field.name] = Yup.array().of(
         Yup.object().shape({
           ...getValidationSchemaForFields(field.fields, yupMapping)
@@ -57,11 +57,14 @@ const getValidationSchemaForFields = (fields, yupMapping) => {
         ...getValidationSchemaForFields(field.fields, yupMapping)
       });
     } else {
-      let yupFieldValidation = Yup[yupMapping[field.type]](); // get equivalent type for yup first
+      const yupFieldType = yupMapping[field.type];
+
+      let yupFieldValidation = Yup[yupFieldType](); // get equivalent type for yup first
 
       if (field.required) yupFieldValidation = yupFieldValidation.required('Required');
 
-      yupFieldValidation = yupFieldValidation.max(field.maxLength);
+      if (yupFieldType !== 'boolean' && field.maxLength)
+        yupFieldValidation = yupFieldValidation.max(field.maxLength);
 
       // Additional validations from the schema
       if (typeof field.validations === 'function') {
@@ -85,11 +88,11 @@ const getValidationSchema = (schema, yupMapping = formikConstants.DEFAULT_YUP_MA
   if (!(schema?.name && schema?.fields)) return;
 
   // one root
-  return {
+  return Yup.object().shape({
     [schema.name]: Yup.object().shape({
       ...getValidationSchemaForFields(schema.fields, yupMapping)
     })
-  };
+  });
 };
 
 export { getInitialValuesFromSchema, getValidationSchema };
