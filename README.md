@@ -3,9 +3,10 @@
 (STILL IN PROGRESS)
 
 ##TODO
-
+- Custom validations from Schema
 - Storybook for sample app
 - Dynamic Lookup Source (API)
+- Hierarchical fields - Filter lookups based on other field's value
 
 ## FEATURES
 
